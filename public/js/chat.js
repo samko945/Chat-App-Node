@@ -5,4 +5,14 @@
 - returns a Socket object which represents the client's connection to the server and allows the client to interact with the server using the Socket.IO protocol
     it provides methods for sending and receiving messages (events) between the client and the server
 */
-io();
+const socket = io();
+
+// on countUpdated event
+socket.on("countUpdated", (count) => {
+	console.log("The count has been updated!", count);
+});
+
+document.querySelector("#increment").addEventListener("click", () => {
+	console.log("Clicked");
+	socket.emit("increment");
+});
