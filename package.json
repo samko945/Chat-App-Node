@@ -1,0 +1,18 @@
+{
+	"dependencies": {
+		"express": "^4.19.2"
+	},
+	"name": "chat-app",
+	"version": "1.0.0",
+	"description": "Real-time chat app",
+	"main": "index.js",
+	"devDependencies": {
+		"nodemon": "^3.1.4"
+	},
+	"scripts": {
+		"dev": "nodemon ./src/index.js",
+		"start": "node ./src/index.js"
+	},
+	"author": "",
+	"license": "ISC"
+}
