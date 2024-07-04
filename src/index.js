@@ -15,10 +15,17 @@ app.use(express.static(publicDirPath));
 io.on("connection", (socket) => {
 	console.log("New web socket connection");
 
+	// sent to the client that connected
 	socket.emit("message", "Welcome Positive Potato!");
+	// sent to every client except the one that connected
+	socket.broadcast.emit("message", "A new user has joined!");
 
 	socket.on("sendMessage", (message) => {
 		io.emit("message", message);
+	});
+
+	socket.on("disconnect", () => {
+		io.emit("message", "A user has left.");
 	});
 });
 
