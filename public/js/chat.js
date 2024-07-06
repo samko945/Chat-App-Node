@@ -10,7 +10,10 @@ const socket = io();
 document.querySelector("#message-form").addEventListener("submit", (e) => {
 	e.preventDefault();
 	const message = e.target.elements.message.value;
-	socket.emit("sendMessage", message);
+	// emit( arg1=eventName,  [...args]=data,  cb=ran when acknoledged from other end )
+	socket.emit("sendMessage", message, (cbMessage) => {
+		console.log("The message was delivered", cbMessage);
+	});
 });
 
 socket.on("message", (message) => {

@@ -20,8 +20,10 @@ io.on("connection", (socket) => {
 	// sent to every client except the one that connected
 	socket.broadcast.emit("message", "A new user has joined!");
 
-	socket.on("sendMessage", (message) => {
+	socket.on("sendMessage", (message, callback) => {
 		io.emit("message", message);
+		//       cbMessage
+		callback("Delivered!");
 	});
 
 	socket.on("sendLocation", (coords) => {
