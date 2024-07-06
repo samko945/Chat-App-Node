@@ -26,10 +26,9 @@ io.on("connection", (socket) => {
 		if (filter.isProfane(message)) {
 			return callback("Profanity is not allowed!");
 		}
-
 		io.emit("message", message);
 		//       cbMessage
-		callback("Delivered!");
+		callback();
 	});
 
 	socket.on("sendLocation", (coords, callback) => {
