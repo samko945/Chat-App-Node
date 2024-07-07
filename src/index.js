@@ -26,9 +26,9 @@ io.on("connection", (socket) => {
 		socket.join(user.room);
 
 		// sent to the client that connected
-		socket.emit("message", generateMessage("Welcome!"));
+		socket.emit("message", generateMessage(user.room, "Welcome!"));
 		// sent to every client except the one that connected
-		socket.broadcast.to(user.room).emit("message", generateMessage(`${user.username} has joined!`));
+		socket.broadcast.to(user.room).emit("message", generateMessage("Admin", `${user.username} has joined!`));
 
 		callback();
 	});
@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
 		if (filter.isProfane(message)) {
 			return callback("Profanity is not allowed!");
 		}
-		io.to(user.room).emit("message", generateMessage(message));
+		io.to(user.room).emit("message", generateMessage(user.username, message));
 		//       cbMessage
 		callback();
 	});
@@ -48,7 +48,10 @@ io.on("connection", (socket) => {
 		const user = getUser(socket.id);
 		io.to(user.room).emit(
 			"locationMessage",
-			generateLocationMessage(`https://www.google.com/maps/@${coords.latitude},${coords.longitude}`)
+			generateLocationMessage(
+				user.username,
+				`https://www.google.com/maps/@${coords.latitude},${coords.longitude}`
+			)
 		);
 		callback();
 	});
@@ -56,7 +59,7 @@ io.on("connection", (socket) => {
 	socket.on("disconnect", () => {
 		const user = removeUser(socket.id);
 		if (user) {
-			io.to(user.room).emit("message", generateMessage(`${user.username} has left.`));
+			io.to(user.room).emit("message", generateMessage(user.room, `${user.username} has left.`));
 		}
 	});
 });
