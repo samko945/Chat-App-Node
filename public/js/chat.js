@@ -17,6 +17,7 @@ const $messages = document.querySelector("#messages");
 // templates
 const messageTemplate = document.querySelector("#message-template").innerHTML;
 const locationMessageTemplate = document.querySelector("#location-message-template").innerHTML;
+const sidebarTemplate = document.querySelector("#sidebar-template").innerHTML;
 
 // options
 //                          remove the ? prefix
@@ -59,6 +60,14 @@ socket.on("locationMessage", (data) => {
 		createdAt: moment(data.createdAt).format("h:mm a"),
 	});
 	$messages.insertAdjacentHTML("beforeend", html);
+});
+
+socket.on("roomData", ({ room, users }) => {
+	const html = Mustache.render(sidebarTemplate, {
+		room,
+		users,
+	});
+	document.querySelector("#sidebar").innerHTML = html;
 });
 
 $sendLocationButton.addEventListener("click", () => {
