@@ -17,17 +17,22 @@ app.use(express.static(publicDirPath));
 io.on("connection", (socket) => {
 	console.log("New web socket connection");
 
-	// sent to the client that connected
-	socket.emit("message", generateMessage("Welcome!"));
-	// sent to every client except the one that connected
-	socket.broadcast.emit("message", generateMessage("A new user has joined!"));
+	socket.on("join", ({ username, room }) => {
+		socket.join(room);
+
+		// sent to the client that connected
+		socket.emit("message", generateMessage("Welcome!"));
+		// sent to every client except the one that connected
+		socket.broadcast.to(room).emit("message", generateMessage(`${username} has joined!`));
+	});
 
 	socket.on("sendMessage", (message, callback) => {
 		const filter = new Filter();
 		if (filter.isProfane(message)) {
 			return callback("Profanity is not allowed!");
 		}
-		io.emit("message", generateMessage(message));
+		// all rooms' messages are going to one static room
+		io.to("maple").emit("message", generateMessage(message));
 		//       cbMessage
 		callback();
 	});
