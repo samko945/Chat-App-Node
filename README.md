@@ -1,6 +1,7 @@
 # Live Demo
 
-Check out the deployed app [here](chat-app-node-gi9f.onrender.com/).
+Check out the deployed app [here](https://chat-app-node-gi9f.onrender.com/).
+(On initial visit, please allow 1 min for the deployed server to run)
 
 # Project Summary
 
