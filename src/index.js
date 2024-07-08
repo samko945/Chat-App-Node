@@ -8,7 +8,7 @@ const { addUser, removeUser, getUser, getUsersInRoom } = require("./utils/users"
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server);
+const io = socketio(server, { addTrailingSlash: false });
 
 const port = process.env.PORT || 3000;
 const publicDirPath = path.join(__dirname, "../public");
@@ -28,7 +28,7 @@ io.on("connection", (socket) => {
 		// sent to the client that connected
 		socket.emit("message", generateMessage(user.room, "Welcome!"));
 		// sent to every client except the one that connected
-		socket.broadcast.to(user.room).emit("message", generateMessage("Admin", `${user.username} has joined!`));
+		socket.broadcast.to(user.room).emit("message", generateMessage(user.room, `${user.username} has joined!`));
 		io.to(user.room).emit("roomData", {
 			room: user.room,
 			users: getUsersInRoom(user.room),
