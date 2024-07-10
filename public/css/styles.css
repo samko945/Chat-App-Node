@@ -10,6 +10,10 @@ html {
 	font-size: 16px;
 }
 
+ul {
+	list-style: none;
+}
+
 input {
 	font-size: 14px;
 }
@@ -22,6 +26,10 @@ body {
 
 h1 {
 	margin-bottom: 16px;
+}
+
+.color2nd {
+	color: rgb(123, 123, 158);
 }
 
 label {
@@ -56,6 +64,16 @@ button:disabled {
 	background: #7c5cbf94;
 }
 
+li button {
+	all: unset;
+}
+
+li button:hover {
+	background: none;
+	color: #6b47b8;
+	cursor: pointer;
+}
+
 /* Join Page Styles */
 
 .centered-form {
@@ -71,7 +89,17 @@ button:disabled {
 	box-shadow: 0px 0px 17px 1px #1d1f26;
 	background: #f7f7fa;
 	padding: 24px;
-	width: 250px;
+	width: 600px;
+	justify-content: center;
+	/* align-items: center; */
+}
+
+.box-split {
+	display: flex;
+	flex-direction: row;
+}
+.box-split > div:nth-of-type(2) {
+	margin-left: 4rem;
 }
 
 .centered-form button {

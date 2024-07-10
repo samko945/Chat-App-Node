@@ -6,19 +6,39 @@
 		<title>Chat App</title>
 		<link rel="icon" href="./img/favicon.png" />
 		<link rel="stylesheet" href="./css/styles.css" />
+		<script defer type="module" src="/js/menu.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
 	</head>
 	<body>
 		<div class="centered-form">
-			<div class="centered-form__box">
-				<h1>Join</h1>
-				<form action="/chat.html">
-					<label for="">Display name</label>
-					<input type="text" name="username" placeholder="Display name" required />
-					<label for="">Room</label>
-					<input type="text" name="room" placeholder="Room" required />
-					<button type="submit">Join</button>
-				</form>
+			<div class="centered-form__box box-split">
+				<div>
+					<h1>Join</h1>
+					<form action="/chat.html">
+						<label for="username">Display name</label>
+						<input id="username" type="text" name="username" placeholder="Display name" required />
+						<label for="room">Room</label>
+						<input id="room" type="text" name="room" placeholder="Room" required />
+						<button type="submit">Join</button>
+					</form>
+				</div>
+				<div>
+					<h1 class="color2nd">Rooms</h1>
+					<ul id="room__list"></ul>
+				</div>
 			</div>
 		</div>
+
+		<script id="room__list-item-template" type="text/html">
+			   {{#rooms}}
+			<li>
+			  <button>
+			    <span>{{name}}<span>
+			    <span>{{users}}</span>
+			   </button>
+			</li>
+			   {{/rooms}}
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
 	</body>
 </html>
