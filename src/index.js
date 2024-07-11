@@ -4,7 +4,7 @@ const express = require("express");
 const socketio = require("socket.io");
 const Filter = require("bad-words");
 const { generateMessage, generateLocationMessage } = require("./utils/messages");
-const { addUser, removeUser, getUser, getUsersInRoom } = require("./utils/users");
+const { users, addUser, removeUser, getUser, getUsersInRoom, getRoomsAndUsers } = require("./utils/users");
 
 const app = express();
 const server = http.createServer(app);
@@ -14,6 +14,12 @@ const port = process.env.PORT || 3000;
 const publicDirPath = path.join(__dirname, "../public");
 
 app.use(express.static(publicDirPath));
+
+app.get("/rooms", (req, res) => {
+	const rooms = getRoomsAndUsers();
+	console.log(users);
+	res.send(rooms);
+});
 
 io.on("connection", (socket) => {
 	console.log("New web socket connection");
