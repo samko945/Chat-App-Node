@@ -30,14 +30,17 @@
 		</div>
 
 		<script id="room__list-item-template" type="text/html">
-			   {{#rooms}}
-			<li>
-			  <button class="room-button">
-			    <span>{{name}}<span>
-			    <span>{{users.length}}</span>
-			   </button>
-			</li>
-			   {{/rooms}}
+			{{^rooms}}
+			  <p>There are no active rooms.<br/> Start a new room!</p>
+			{{/rooms}}
+			{{#rooms}}
+				<li>
+					<button class="room-button">
+						<span>{{name}}<span>
+						<span>{{users.length}}</span>
+					</button>
+				</li>
+			{{/rooms}}
 		</script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
 	</body>
