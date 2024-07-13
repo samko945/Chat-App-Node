@@ -74,6 +74,23 @@ li button:hover {
 	cursor: pointer;
 }
 
+.room-button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.5rem 0;
+	font-size: 1.25rem;
+}
+
+.room-button span {
+	display: flex;
+	align-items: center;
+}
+
+.material-symbols-outlined {
+	margin-left: 10px;
+}
+
 /* Join Page Styles */
 
 .centered-form {

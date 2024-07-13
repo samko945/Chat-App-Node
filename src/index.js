@@ -17,7 +17,6 @@ app.use(express.static(publicDirPath));
 
 app.get("/rooms", (req, res) => {
 	const rooms = getRoomsAndUsers();
-	console.log(users);
 	res.send(rooms);
 });
 
