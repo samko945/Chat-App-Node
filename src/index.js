@@ -23,6 +23,8 @@ app.get("/rooms", (req, res) => {
 io.on("connection", (socket) => {
 	console.log("New web socket connection");
 
+	socket.emit("updateRooms", getRoomsAndUsers());
+
 	socket.on("join", ({ username, room }, callback) => {
 		const { error, user } = addUser({ id: socket.id, username, room });
 		if (error) {
@@ -38,6 +40,8 @@ io.on("connection", (socket) => {
 			room: user.room,
 			users: getUsersInRoom(user.room),
 		});
+
+		socket.emit("updateRooms", getRoomsAndUsers());
 
 		callback();
 	});
