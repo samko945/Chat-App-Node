@@ -22,7 +22,6 @@ app.get("/rooms", (req, res) => {
 
 io.on("connection", (socket) => {
 	console.log("New web socket connection");
-
 	socket.emit("updateRooms", getRoomsAndUsers());
 
 	socket.on("join", ({ username, room }, callback) => {
@@ -41,8 +40,7 @@ io.on("connection", (socket) => {
 			users: getUsersInRoom(user.room),
 		});
 
-		socket.emit("updateRooms", getRoomsAndUsers());
-
+		io.emit("updateRooms", getRoomsAndUsers());
 		callback();
 	});
 
@@ -77,6 +75,7 @@ io.on("connection", (socket) => {
 				room: user.room,
 				users: getUsersInRoom(user.room),
 			});
+			io.emit("updateRooms", getRoomsAndUsers());
 		}
 	});
 });
